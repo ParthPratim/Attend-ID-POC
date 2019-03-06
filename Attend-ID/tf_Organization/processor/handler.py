@@ -2,7 +2,7 @@ from sawtooth_sdk.processor.handler import TransactionHandler
 from processor.payload import OrgsPayload
 import hashlib
 
-
+ 
 ORG_ADDRESS_PREFIX = hashlib.sha512("orgs".encode('utf-8')).hexdigest()[0:6]
 
 class tf_Organization(TransactionHandler) :
