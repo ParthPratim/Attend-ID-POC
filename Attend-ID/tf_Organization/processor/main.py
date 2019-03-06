@@ -5,6 +5,7 @@ from sawtooth_sdk.processor.config import get_log_config
 from sawtooth_sdk.processor.config import get_log_dir
 from processor.handler import tf_Organization
 
+
 def processor_main():
     print("VERBOSE : Processor Began")
     tp = TransactionProcessor(url='tcp://sawtooth-0-7fbdf6bdfb-45w8z:4004')
