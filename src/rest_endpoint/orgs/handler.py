@@ -4,6 +4,7 @@ import json
 import secrets
 from rest_endpoint.orgs.meta import frame_msg
 from rest_endpoint.sawtooth_client.tx import SawtoothClientStub
+from rest_endpoint.orgs.state import OrgsStateAddress
 
 class OrgsHandler(tornado.web.RequestHandler):
     def post(self):
@@ -32,5 +33,7 @@ class OrgsHandler(tornado.web.RequestHandler):
         rnd_org_id = secrets.token_hex(32)
         payload["org_id"] = rnd_org_id
         sawtooth_rest_api =  SawtoothClientStub(tf_name="orgs",tf_version="1.0",payload=payload)
-        sawtooth_rest_api.set_address_scope()
+        address = OrgsStateAddress.for_new_org(payload['org_id'],payload['creator_id'])
+        sawtooth_rest_api.set_address_scope(inputs=[address.address],outputs=[address.address])
         response = sawtooth_rest_api.send()
+        print(response)
