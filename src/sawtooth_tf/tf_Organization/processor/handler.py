@@ -20,5 +20,5 @@ class tf_Organization(TransactionHandler) :
 
     def apply(self, transaction, context):
         header = transaction.header
-        payload = OrgsPayload(payload=transaction.payload)
+        payload = OrgsPayload(payload=transaction.payload,context=context)
         
