@@ -12,6 +12,8 @@ from sawtooth_sdk.protobuf.batch_pb2 import Batch
 from sawtooth_sdk.protobuf.batch_pb2 import BatchList
 from sawtooth_sdk.protobuf.batch_pb2 import BatchList
 from tornado.httpclient import AsyncHTTPClient
+import urllib.request
+from urllib.error import HTTPError
 
 SAWTOOTH_REST_API_ENDPOINT = "http://localhost:4000/batches"
 
@@ -27,8 +29,8 @@ class SawtoothClientStub:
     
     def load_keys(self):
         context = create_context('secp256k1')
-        self._priv_key = open("/home/devman/GenesisHack/POC/keys/rest_client/private.key").read()
-        self._signer = CryptoFactory(context).new_signer(Secp256k1PrivateKey.from_hex(priv_key))
+        self._priv_key = open("/genesis-hack/keys/rest_client/private.key").read()
+        self.signer = CryptoFactory(context).new_signer(Secp256k1PrivateKey.from_hex(self._priv_key))
 
     def txn_header_gen(self):
         self.load_keys()
@@ -71,15 +73,18 @@ class SawtoothClientStub:
         self.batch_list_bytes = BatchList(batches=[batch]).SerializeToString()
     
     def prepare_tx_batch(self):
-        self.txn_header_bytes()
         self.txn_header_gen()
         self.create_txn()
         self.create_batch()
     
-    async def send(self):
-        http_client = AsyncHTTPClient()
-        response = await http_client.fetch(SAWTOOTH_REST_API_ENDPOINT,method='POST',headers = {
-            'Content-Type': 'application/octet-stream'
-        },body = self.batch_list_bytes)
-        raise response.body
+    def send(self):
+        try:
+            request = urllib.request.Request(
+                'http://sawtooth-0:8008/batches',
+                self.batch_list_bytes,
+                method='POST',
+                headers={'Content-Type': 'application/octet-stream'})
+            response = urllib.request.urlopen(request)
+        except HTTPError as e:
+            response = e.file
     

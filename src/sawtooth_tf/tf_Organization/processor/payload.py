@@ -24,6 +24,7 @@ class OrgsPayload:
         self._action = action
         self._org_name = org_name
         self._creator_id = creator_id
+        self._org_id = org_id
     
     @property
     def action(self):
