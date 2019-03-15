@@ -2,6 +2,8 @@ import tornado.web
 import tornado.escape
 import json
 import os
+import hmac
+import hashlib
 from rest_endpoint.orgs.meta import frame_msg
 from rest_endpoint.sawtooth_client.tx import SawtoothClientStub
 from rest_endpoint.orgs.state import OrgsStateAddress
@@ -30,7 +32,7 @@ class OrgsHandler(tornado.web.RequestHandler):
                 },status="BAD_REQUEST")
             ))
             self.finish()
-        rnd_org_id = os.urandom(32).hex()
+        rnd_org_id = hmac.new(os.urandom(16).hex().encode('utf-8'),(payload['org_name']+payload['creator_id']).encode('utf-8'),hashlib.sha256).hexdigest()
         payload["org_id"] = rnd_org_id
         sawtooth_rest_api =  SawtoothClientStub(tf_name="orgs",tf_version="1.0",payload=payload)
         address = OrgsStateAddress.for_new_org(payload['org_id'],payload['creator_id'])

@@ -1,7 +1,9 @@
 from sawtooth_sdk.processor.handler import TransactionHandler
 from processor.payload import OrgsPayload
-from processor.transaction import TransactionHandler
+import processor.transaction as txhandler
 import hashlib
+ 
+ORG_ADDRESS_PREFIX = hashlib.sha512("orgs".encode('utf-8')).hexdigest()[0:6]
 
 class tf_Organization(TransactionHandler) :
     @property
@@ -19,6 +21,7 @@ class tf_Organization(TransactionHandler) :
     def apply(self, transaction, context):
         header = transaction.header
         payload = OrgsPayload(payload=transaction.payload)
-        t_handler = TransactionHandler(payload,context=context)
+        t_handler = txhandler.TransactionHandler(payload,context=context)
         t_handler.process()
         print("DONE")
+        return "DONE"
