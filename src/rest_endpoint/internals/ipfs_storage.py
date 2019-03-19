@@ -1,6 +1,6 @@
 import ipfsapi
 
-class IpfsStorgae:
+class IpfsStorage:
 
     def __init__(self,hash=None):
         self._fhash = hash
@@ -22,7 +22,7 @@ class IpfsStorgae:
 
     @staticmethod
     def from_hash(hash):
-        return IpfsStorgae(hash)
+        return IpfsStorage(hash)
     
     def load_contents(self):
         contents = self.ipfs_conn.cat(self._fhash)

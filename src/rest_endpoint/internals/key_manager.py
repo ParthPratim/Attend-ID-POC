@@ -7,7 +7,7 @@ import ipfsapi.client
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_PSS
-from rest_endpoint.internals.ipfs_storage import IpfsStorgae
+from rest_endpoint.internals.ipfs_storage import IpfsStorage
 from rest_endpoint.internals.general import hex_to_bytes
 
 class IdentityKeyDriver:
@@ -71,7 +71,7 @@ class IdentityKeyDriver:
             "PrivateKey" : self._private_key_PEM.hex(),
             "PublicKey" : self._public_key_PEM.hex()
         }
-        ipfs = IpfsStorgae()
+        ipfs = IpfsStorage()
         ipfs_hash = ipfs.store_json(keys_json)    
         return ipfs
     
