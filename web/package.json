@@ -1,0 +1,16 @@
+{
+	"name": "sampleapp",
+	"version": "1.0.0",
+	"main": "sever.js",
+	"dependencies": {
+		"cbor": "^4.1.5",
+		"express": "^4.16.0",
+		"form-data": "",
+		"mime": "^1.6.0",
+		"mime-types": "1.0.x",
+		"multer": "",
+		"npm": "^6.9.0",
+		"request": "^2.88.0",
+		"requests": "^0.2.2"
+	}
+}

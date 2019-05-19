@@ -1,0 +1,42 @@
+<html>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <input type="file" id="f1"><br>
+  <input type="file" id="f2"><br>
+  <input type="file" id="f3"><br>
+  <input type="file" id="f4"><br>
+  <input type="file" id="f5"><br>
+  <input type="file" id="f6"><br>
+  <input type="file" id="f7"><br>
+  <input type="file" id="f8"><br>
+  <input type="file" id="f9"><br>
+  <input type="file" id="f10"><br>
+  <button id="upload">UPLOAD</button>
+  </body>
+  <script type="text/javascript">
+    document.getElementById('upload').onclick= function(){
+      var formData = new FormData();
+
+      formData.append('action', 'create');
+      formData.append('uname','Alice')
+      // Attach file
+      for(i = 1; i <= 10 ;i++){
+        formData.append('images', document.getElementById('f'+i).files[0]);
+      }
+
+      $.ajax({
+       url : 'https://127.0.0.1:2018/api/v1/core/digital_id/tx_connector',
+       type : 'POST',
+       data : formData,
+       processData: false,  // tell jQuery not to process the data
+       contentType: false,  // tell jQuery not to set contentType
+       success : function(data) {
+           console.log(data);
+           alert(data);
+       }
+});
+
+    }
+  </script>
+</html>
