@@ -26,10 +26,19 @@ Wait for a couple of minutes or rather grab a coffee and then open up the browse
 **Please follow the below steps carefully as missing any one of these might end you up into unpredictable working of the system**
 
 In the browser type the following : *https://127.0.0.1:2018/*
+
 **Please note that the *https* is very important**.
 On opening this URL you would get an error from the browser. This is very much exepcted. You need to click on *Add Exception* (on Firefox) ot *proceed anyway* (on Chrome).
 
 **Welcome to the AttendID Web Portal**
 
+# Step 4 - (Creating an user):
+On the web UI you can see three options, namely:
+* Create User
+* Create Organization
+* View Dashboard
 
+Let's focus on *Create User* : 
+But before that open up the root directory of the project and open a terminal.
+We will not be clicking pictures. We need atleast 10 clear images with good lighting conditions for the Face Recognition Model to work. For this we have provided you with a tools named img_snap. 
 
