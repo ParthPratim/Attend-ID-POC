@@ -12,16 +12,12 @@ fontScale              = 0.5
 fontColor              = (0,0,0)
 lineType               = 2
 
-protoFile = "pose/mpi/pose_deploy_linevec_faster_4_stages.prototxt"
-weightsFile = "pose/mpi/pose_iter_160000.caffemodel"
-
 base_dir = "../fre_layer/models/"
 modelFile = base_dir+"opencv_face_detector_uint8.pb"
 configFile = base_dir+"opencv_face_detector.pbtxt"
 face_cascade = cv2.CascadeClassifier(base_dir+'haarcascade_frontalface_default.xml')
 net2 = cv2.dnn.readNetFromTensorflow(modelFile, configFile)
 
-net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
 class bcolors:
     HEADER = '\033[95m'
