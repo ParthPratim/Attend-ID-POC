@@ -1,7 +1,7 @@
 import ipfsapi
 from OpenSSL import crypto
 
-class IpfsStorgae:
+class IpfsStorage:
 
     def __init__(self,hash=None):
         self._fhash = hash
@@ -33,16 +33,12 @@ class IpfsStorgae:
 
     @staticmethod
     def from_hash(hash):
-<<<<<<< HEAD
         return IpfsStorage(hash)
 
-=======
-        return IpfsStorgae(hash)
-    
->>>>>>> parent of a2d1800... Fix: IpfsStorage typo
     def load_contents(self):
         contents = self.ipfs_conn.cat(self._fhash)
         return contents
+
 """
 fs = IpfsStorage()
 hash = fs.store_file("server.p12")['Hash']

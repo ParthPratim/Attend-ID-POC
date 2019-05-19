@@ -3,18 +3,21 @@ import ipfsapi
 import hmac
 import hashlib
 import csv
+import json
 import numpy as np
+from PIL import Image
 
 
-conn = ipfsapi.connect()
+conn = ipfsapi.connect(host="ipfs-net")
 
 struct_newuser = {
-    "DigitalID" : digital_id,
+    "DigitalID" : "",
     "RGBS" : []
 }
 
-TRAIN_CSV = "event_sub/data/train.csv"
-PADDING_CSV = "event_sub/data/padding.csv"
+TRAIN_CSV = "../event_sub/data/train.csv"
+PADDING_CSV = "../event_sub/data/padding.csv"
+SERVER_P12 = "../keys/ssl/server.p12"
 
 for persons in os.listdir("../test_dataset/train"):
     raw_imgs = []
@@ -25,6 +28,7 @@ for persons in os.listdir("../test_dataset/train"):
         pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
         np_img = np.array(pixels,dtype=np.uint8)
         raw_imgs.append(np_img)
+
     digital_id = hmac.new(os.urandom(16).hex().encode('utf-8'),(persons).encode('utf-8'),hashlib.sha256).hexdigest()
     struct_newuser["DigitalID"] = digital_id
     struct_newuser["RGBS"] = raw_imgs
@@ -37,3 +41,13 @@ for persons in os.listdir("../test_dataset/train"):
     with open(PADDING_CSV,"a") as train_csv:
         writer = csv.writer(train_csv)
         writer.writerow([digital_id,hash])
+
+hash = conn.add(SERVER_P12)
+with open("../config.json","r") as cjf:
+    cj = json.load(cjf)
+    cj["SERVER_PK12_FILE_HASH"] = hash['Hash']
+
+with open("../config.json","w") as cjf:
+    json.dump(cj,cjf)
+
+print("Initial Setup Has Been Done !")
