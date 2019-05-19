@@ -28,7 +28,7 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
+"""
 def RecordVideo():
 
     cap = cv2.VideoCapture(0)
@@ -57,6 +57,7 @@ def RecordVideo():
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+"""
 
 def ImageSnap(uname):
     interesting_frames = []
@@ -157,5 +158,5 @@ if __name__ == "__main__":
 
     os.mkdir(name)
     print(bcolors.WARNING + bcolors.BOLD + bcolors.UNDERLINE + "Move your face slowly to the left, right, up and down !!" + bcolors.ENDC)
-    RecordVideo()
+
     ImageSnap(name)

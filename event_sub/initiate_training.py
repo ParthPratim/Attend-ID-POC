@@ -12,11 +12,11 @@ LOG_FILE = "event_sub/data/train.json"
 
 def Now(new_digital_id,hash):
 
-    #with open(TRAIN_CSV,"a") as train_csv:
-        #writer = csv.writer(train_csv)
-        #writer.writerow([new_digital_id,hash])
+    with open(TRAIN_CSV,"a") as train_csv:
+        writer = csv.writer(train_csv)
+        writer.writerow([new_digital_id,hash])
 
-    #train_csv.close()
+    train_csv.close()
 
     with open(TRAIN_CSV,"r") as train_csv:
         reader = csv.reader(train_csv)

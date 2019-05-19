@@ -80,14 +80,17 @@ services:
     volumes:
         - "sawtooth-data:/usr/share/sawtooth"
     entrypoint: "bash -c \"\
-        sawadm keygen && \
-        sawtooth keygen my_key && \
-        sawset genesis -k /root/.sawtooth/keys/my_key.priv && \
-        sawadm genesis config-genesis.batch && \
+        sleep 3 &&
+        if [ ! -f /usr/share/sawtooth/keys/validator.priv ]; then
+        sawadm keygen &&
+        sawtooth keygen my_key &&
+        sawset genesis -k /root/.sawtooth/keys/my_key.priv &&
+        sawadm genesis config-genesis.batch
+        fi;
         sawtooth-validator -vv \
           --endpoint tcp://validator:8800 \
           --bind component:tcp://eth0:4004 \
-          --bind network:tcp://eth0:8800 \
+          --bind network:tcp://eth0:8800
         \""
 
   devmode-engine:
@@ -119,4 +122,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/devman/GenesisHack/POC/src
+      device: /home/devman/GenesisHack/POC/Attend-ID-POC

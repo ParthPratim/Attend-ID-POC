@@ -25,8 +25,8 @@ from fre_layer.finalize_image import DetectAlignResize
 from fre_layer.readimg import raw_process
 from facenet.face_recognition_image import RecognizeFace
 
-
-SERVER_PK12_FILE_HASH = "QmQEjF8i8iPT7bdM8u1ncJhWXBdThYDF3Dj98ocLzJdX6q"
+with open("config.json","r") as config_json:
+    SERVER_PK12_FILE_HASH = json.load(config_json)["SERVER_PK12_FILE_HASH"]
 
 class DigitalIDHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
