@@ -22,6 +22,7 @@
  var OrganizationID = ""
  var SessionID = ""
  var ss;
+ var localStorage = window.localStorage;
 
  var _init = function() {
    ss = new cordova.plugins.SecureStorage(
@@ -132,7 +133,7 @@ function InititateSession(){
              formData.append("sess_ini_did",DigitalID)
 
              $.ajax({
-              url : 'http://192.168.43.217:2017/app/attendance/new_session',
+              url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/attendance/new_session',
               type : 'POST',
               data : formData,
               processData: false,  // tell jQuery not to process the data
@@ -219,7 +220,7 @@ function cameraTakePicture() {
       formData.append("sess_id",SessionID)
 
       $.ajax({
-       url : 'http://192.168.43.217:2017/app/attendance/verify_user',
+       url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/attendance/verify_user',
        type : 'POST',
        data : formData,
        processData: false,  // tell jQuery not to process the data

@@ -17,6 +17,7 @@
  * under the License.
  */
 var ss;
+var localStorage = window.localStorage;
 
 var _init = function() {
   ss = new cordova.plugins.SecureStorage(
@@ -48,6 +49,7 @@ var app = {
     initialize: function() {
 
       document.getElementById('login').addEventListener('click',cameraTakePicture)
+      document.getElementById('set_server_host').addEventListener('click',SetServerHost)
       document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
@@ -186,10 +188,9 @@ function cameraTakePicture() {
       var formData = new FormData();
       formData.append("images",blob,'user_login.jpeg')
 
-
-
+      alert(localStorage.getItem("ServerHost"))
       $.ajax({
-       url : 'http://192.168.43.217:2017/app/login',
+       url : 'http://'+localStorage.getItem("ServerHost")+'/app/login',
        type : 'POST',
        data : formData,
        processData: false,  // tell jQuery not to process the data
@@ -209,6 +210,33 @@ function cameraTakePicture() {
    function onFail(message) {
       alert('Failed because: ' + message);
    }
+}
+
+function SetServerHost(){
+  navigator.notification.prompt(
+    "Enter the IP Adddress of host (please don't) add http or https",  // message
+    setHost,                  // callback to invoke
+    'Change Server Host Address',            // title
+    ['Ok','Cancel'],             // buttonLabels
+ );
+}
+
+function setHost(result){
+  text = result.input1.trim()
+  if(text.length == 0 ){
+    alert("Enter a valid Host Address")
+  }
+  else{
+    setIP(text)
+  }
+}
+
+function setIP(ip){
+  if(ss == undefined){
+    setTimeout(function(){setIP(ip)}, 50);//wait 50 millisecnds then recheck
+    return;
+  }
+  localStorage.setItem("ServerHost", ip);
 }
 
 app.initialize();

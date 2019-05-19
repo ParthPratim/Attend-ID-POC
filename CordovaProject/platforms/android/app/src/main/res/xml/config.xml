@@ -13,7 +13,7 @@
     <feature name="SecureStorage">
         <param name="android-package" value="com.crypho.plugins.SecureStorage" />
     </feature>
-    <name>CordovaApp</name>
+    <name>AttendID</name>
     <description>
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
@@ -28,5 +28,9 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
+    <icon density="ldpi" src="res/icon/android/logo.png" />
+    <icon density="mdpi" src="res/icon/android/logo.png" />
+    <icon density="hdpi" src="res/icon/android/logo.png" />
+    <icon density="xhdpi" src="res/icon/android/logo.png" />
     <preference name="loglevel" value="DEBUG" />
 </widget>
