@@ -79,8 +79,9 @@ services:
         - SAWTOOTH_HOME=/usr/share/sawtooth
     volumes:
         - "sawtooth-data:/usr/share/sawtooth"
-    entrypoint: "bash -c \"\
-        sleep 3 &&
+    command: |
+      bash -c "
+        sleep 3 && mkdir -p /usr/share/sawtooth/data && mkdir -p /usr/share/sawtooth/keys && mkdir -p  /usr/share/sawtooth/logs &&
         if [ ! -f /usr/share/sawtooth/keys/validator.priv ]; then
         sawadm keygen &&
         sawtooth keygen my_key &&
@@ -91,7 +92,7 @@ services:
           --endpoint tcp://validator:8800 \
           --bind component:tcp://eth0:4004 \
           --bind network:tcp://eth0:8800
-        \""
+      "
 
   devmode-engine:
     image: hyperledger/sawtooth-devmode-engine-rust:1.1
