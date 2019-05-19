@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+
+message EventSubscription {
+  string event_type = 1;
+  repeated EventFilter filters = 2;
+}
+
+message Event {
+  // Used to subscribe to events and servers as a hint for how to deserialize
+  // event_data and what pairs to expect in attributes.
+  string event_type = 1;
+
+  // Transparent data defined by the event_type.
+  message Attribute {
+    string key = 1;
+    string value = 2;
+  }
+  repeated Attribute attributes = 2;
+
+  // Opaque data defined by the event_type.
+  bytes  data = 3;
+}
+
+message EventList {
+    repeated Event events = 1;
+}
+
+message EventFilter {
+    // EventFilter is used when subscribing to events to limit the events
+    // received within a given event type. See
+    // validator/server/events/subscription.py for further explanation.
+    string key = 1;
+    string match_string = 2;
+
+    enum FilterType {
+      FILTER_TYPE_UNSET = 0;
+      SIMPLE_ANY = 1;
+      SIMPLE_ALL = 2;
+      REGEX_ANY  = 3;
+      REGEX_ALL  = 4;
+    }
+    FilterType filter_type = 3;
+}
+
+
+message ClientEventsSubscribeRequest {
+    repeated EventSubscription subscriptions = 1;
+    // The block id (or ids, if trying to walk back a fork) the subscriber last
+    // received events on. It can be set to empty if it has not yet received the
+    // genesis block.
+    repeated string last_known_block_ids = 2;
+}
