@@ -16,7 +16,7 @@ docker exec -it base_attendid /bin/bash
 ```
 This will open up a shell into the attendid base docker container. Now execute the following command : 
 ```
-cd src\scripts
+cd src/scripts
 python3 init.py
 ```
 This step is needed to be done just once.
@@ -40,5 +40,20 @@ On the web UI you can see three options, namely:
 
 Let's focus on *Create User* : 
 But before that open up the root directory of the project and open a terminal.
-We will not be clicking pictures. We need atleast 10 clear images with good lighting conditions for the Face Recognition Model to work. For this we have provided you with a tools named img_snap. 
+We will not be clicking pictures. We need atleast 10 clear images with good lighting conditions for the Face Recognition Model to work. For this we have provided you with a tools named img_snap but for it to work we need to give it a video to generate images from. 
+
+```
+// MAKE SURE YOU HAVE python 3.6 or above installed
+python3 -m pip install ecapture
+cd tools
+python3 record.py
+
+// Video has been recorded. Now generate the pictures
+docker exec -it base_attendid /bin/bash
+cd src/tools
+python3 img_snap.py 
+
+// Now follow the tool's instructions and you will have your images in a folder of a name of your choice
+
+```
 
