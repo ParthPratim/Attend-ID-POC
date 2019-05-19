@@ -79,4 +79,4 @@ The Train FR Model button alows you to train the your organization's face recogn
 The Transfer asset is a utility which requires you to know the Organization ID of the organization you wan't to transfer it to using the **TRANSFER** button below every user in your member list.
 
 # Step 7 - (Attendance Marking - Mobile App)
-On running the mobile app you need to 
+On running the mobile app you need to first click on **Login** to click a picture of yourself and our servers would authenticate you using Face Recognition. If you have attendance marking previlidges then you can take the attendance of our membres in the member list by creating named attendance sessions on the App where students/employees click their selfie one by one and get authenticated/rejected acccordingly.
