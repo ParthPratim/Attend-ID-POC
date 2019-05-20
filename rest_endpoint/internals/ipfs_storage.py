@@ -1,4 +1,4 @@
-import ipfsapi
+import ipfshttpclient
 from OpenSSL import crypto
 
 class IpfsStorage:

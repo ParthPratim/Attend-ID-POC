@@ -18,7 +18,7 @@ RUN apt install -y sawtooth
 
 RUN python3 -m pip install tornado bigchaindb_driver
 RUN apt-get install -y curl
-RUN python3 -m pip install pyopenssl ipfsapi
+RUN python3 -m pip install pyopenssl ipfshttpclient
 RUN python3 -m pip install --upgrade protobuf grpcio-tools
 RUN python3 -m pip install pillow imutils
 

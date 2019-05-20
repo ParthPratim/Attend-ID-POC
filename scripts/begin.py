@@ -1,5 +1,5 @@
 import os
-import ipfsapi
+import ipfshttpclient
 import hmac
 import hashlib
 import csv
