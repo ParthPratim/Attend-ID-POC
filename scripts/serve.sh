@@ -1,2 +1,2 @@
-cd src/web
+cd /src/web
 node serve.js
