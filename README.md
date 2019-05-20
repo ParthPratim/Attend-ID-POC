@@ -14,12 +14,18 @@ Fire up a terminal and type
 ```
 docker exec -it base_attendid /bin/bash
 ```
-This will open up a shell into the attendid base docker container. Now execute the following command : 
+This will open up a shell into the attendid base docker container. Now execute the following command (This step is needed to be done just once.) : 
 ```
 cd src/scripts
-python3 init.py
+python3 begin.py
 ```
-This step is needed to be done just once.
+Now in the same terminal window execute the following:
+**Note: The following two commands are needed to be executed everytime you want to run the AttendID system. Just open a shell into the *base_attendid* docker container and execute the following.**
+
+```
+cd /src
+supervisord -c supervisord.conf
+```
 
 # Step 3:
 Wait for a couple of minutes or rather grab a coffee and then open up the browser. 
@@ -79,4 +85,18 @@ The Train FR Model button alows you to train the your organization's face recogn
 The Transfer asset is a utility which requires you to know the Organization ID of the organization you wan't to transfer it to using the **TRANSFER** button below every user in your member list.
 
 # Step 7 - (Attendance Marking - Mobile App)
-On running the mobile app you need to first click on **Login** to click a picture of yourself and our servers would authenticate you using Face Recognition. If you have attendance marking previlidges then you can take the attendance of our membres in the member list by creating named attendance sessions on the App where students/employees click their selfie one by one and get authenticated/rejected acccordingly.
+
+**Android APK :** *CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk*
+
+Install the APK on your phone by connecting your phone to your laptop/PC and execute the following :
+**(adb should be installed)**
+```
+adb install CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+```
+Make sure that your phone and the laptop running the docker setup share same the same WLAN network.
+
+On running the mobile app you will be given an option on the home screen to **Set Server Host** . 
+
+Select that option and enter the IP address of the laptop/host. You can find your IP address by running *ipconfig* (Windows) or *ifconfig* (Linux).
+
+You need to then click on **Login** to click a picture of yourself and our servers would authenticate you using Face Recognition. If you have attendance marking previlidges then you can take the attendance of our membres in the member list by creating named attendance sessions on the App where students/employees click their selfie one by one and get authenticated/rejected acccordingly.
