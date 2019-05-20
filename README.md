@@ -5,6 +5,13 @@ Make sure you are in the root directory of the project.
 
 # Step 1 :
 Let's compose the AttendID network
+
+Open up the compose-network.yaml file present in the root directory of the project.
+
+**Replace the path present in the last line of script with the complete path to your directory where the Attend-ID-POC repo was cloned **
+
+Now open up a terminal and execute the following:
+
 ```
 docker-compose -p attendid -f compose-network.yaml up
 ```
