@@ -123,4 +123,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/devman/GenesisHack/POC/Attend-ID-POC
+      device: /complete/path/source-code/of/Attend-ID-POC
