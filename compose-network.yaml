@@ -35,8 +35,11 @@ services:
     container_name: base_attendid
     ports:
       - "2020:2020"
+      - "2018:2018"
+      - "2017:2017"
     expose:
-      - "2020"
+      - "2018"
+      - "2017"
     depends_on:
       - validator
     volumes:
@@ -123,4 +126,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /complete/path/source-code/of/Attend-ID-POC
+      device: /complete/path/to/cloned/repo/of/Attend-ID-POC
