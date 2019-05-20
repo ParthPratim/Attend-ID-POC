@@ -22,6 +22,7 @@ RUN python3 -m pip install pyopenssl ipfsapi
 RUN python3 -m pip install --upgrade protobuf grpcio-tools
 RUN python3 -m pip install pillow imutils
 
+RUN apt-get update
 RUN apt-get install -y cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
 RUN apt-get install -y python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 RUN curl -LO http://github.com/opencv/opencv/archive/master.zip
@@ -40,6 +41,3 @@ RUN python3 -m pip install scipy scikit-learn tensorflow numpy==1.16.2
 RUN python3 -m pip install supervisor
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
-COPY . /attendid
-WORKDIR /attendid/web
-RUN npm install
