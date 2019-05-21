@@ -29,7 +29,7 @@ class DigitalIDPayload:
         if "bdb_pub_key" in data:
             bdb_pub_key = data['bdb_pub_key']
         if "bdb_priv_key" in data:
-            bdb_priv_key = data['bdb_prib_key']
+            bdb_priv_key = data['bdb_priv_key']
         if "certificate_hash" in data:
             certificate_hash = data['certificate_hash']
         if "training_image_hash" in data:

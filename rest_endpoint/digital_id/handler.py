@@ -144,9 +144,8 @@ class DigitalIDHandler(tornado.web.RequestHandler):
         print(payload["uname"] + "  :  " + digital_id)
         file_name = payload["uname"]+"."+digital_id+".p12"
 
-        if payload['action'] == "create":
-            while(GetStateData(state_addr) == False):
-                time.sleep(0.8)
+
+        time.sleep(2)
 
         self.write({
             "Headers" : {
