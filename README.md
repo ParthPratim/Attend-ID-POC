@@ -100,6 +100,8 @@ The Train FR Model button alows you to train the your organization's face recogn
 
 The Transfer asset is a utility which requires you to know the Organization ID of the organization you wan't to transfer it to using the **TRANSFER** button below every user in your member list.
 
+NOTE : The OrgID can be found on the top left corner of the dashboard.
+
 # Step 7 - (Attendance Marking - Mobile App)
 
 **Android APK :** *CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk*
