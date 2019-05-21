@@ -83,6 +83,20 @@ app.get('/dashboard/org/creator', (req, res) => {
   }
 })
 
+app.get('/dashboard/org/id', (req, res) => {
+   var CN = GetCN(req)
+  if(CN.localeCompare("None") == 0 ){
+    res.send("Try again by selecting a valid certificate...")
+    res.end()
+    return
+  }
+  else{
+    res.send(CN);
+    res.end();
+  }
+})
+
+
 app.get('/dashboard/org/members', (req, res) => {
 	var CN = GetCN(req)
   console.log(CN)

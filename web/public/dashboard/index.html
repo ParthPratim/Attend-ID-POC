@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJla3e355dfa7d2d333d2d2c5adc4e0f610"/>
+<html><head><meta name="GCD" content="YTk3ODQ3ZWZhN2I4NzZmMzBkNTEwYjJla86420d53c55e8d0ceca74f007f028fc"/>
   <meta charset="utf-8">
   <title>Attend-ID | Dashboard</title>
   <meta name="generator" content="Google Web Designer 5.0.4.0226">
@@ -129,7 +129,6 @@ body {
     border-image-repeat: stretch;
     border-color: transparent;
     color: rgb(255, 255, 255);
-    font-size: 16px;
     font-style: italic;
     font-weight: bold;
     left: 0%;
@@ -137,6 +136,7 @@ body {
     width: 25.07%;
     height: 41px;
     font-family: Oswald;
+    font-size: 10px;
 }
 .gwd-span-1yt8 {
     position: absolute;
@@ -446,6 +446,17 @@ body {
 
       })
 
+      $.get("https://127.0.0.1:2018/dashboard/org/id", function(data) {
+        if (data.localeCompare("ERR_BAD_SSL_CERTIFICATE") == 0) {
+          alert("BAD SSL CERTIFICATE. PLEASE CHECK CERTIFICATE.")
+          window.location.href = "https://127.0.0.1:2018/"
+        }
+        console.log(data)
+        document.getElementById('OrgID').innerHTML = "OrgID : " + data
+
+      })
+
+
       //INFLATE UI
       $.get("https://127.0.0.1:2018/dashboard/org/members", function(data) {
         if ((typeof data).localeCompare("string") == 0 && data.localeCompare("ERR_BAD_SSL_CERTIFICATE") == 0) {
@@ -579,7 +590,7 @@ body {
       <div class="gwd-page-content page1-content gwd-div-zy72">
         <div class="gwd-div-1kcd">
           <button class="gwd-button-boz6">Dashboard</button>
-          <button class="gwd-button-ryhe">OrgName</button>
+          <div class="gwd-button-ryhe" id="OrgID">OrgID : 111111111111111111111111111111111111111111111111111111111111111111</div>
           <div class="gwd-div-q0ec" id="cont_ml">
             <div class="gwd-div-l2p7">Member List</div>
             <div class="gwd-div-pk6o" id="member_list" style="height: auto;">
