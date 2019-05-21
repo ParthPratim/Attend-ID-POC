@@ -13,6 +13,8 @@ Open up the compose-network.yaml file present in the root directory of the proje
 Now open up a terminal and execute the following:
 
 ```
+docker build -t base_attendid
+
 docker-compose -p attendid -f compose-network.yaml up
 ```
 
