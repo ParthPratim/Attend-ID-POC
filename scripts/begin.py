@@ -1,5 +1,5 @@
 import os
-import ipfshttpclient
+import ipfsapi
 import hmac
 import hashlib
 import csv
@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 
 
-conn = ipfshttpclient.connect(host="ipfs-net")
+conn = ipfsapi.connect(host='ipfs-net')
 
 struct_newuser = {
     "DigitalID" : "",
