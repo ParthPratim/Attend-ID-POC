@@ -5,7 +5,7 @@ class IpfsStorage:
 
     def __init__(self,hash=None):
         self._fhash = hash
-        self.ipfs_conn = ipfsapi.connect(host="ipfs-net")
+        self.ipfs_conn = ipfshttpclient.connect(host="ipfs-net")
 
     @property
     def hash(self):
