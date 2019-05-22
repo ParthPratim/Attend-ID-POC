@@ -96,6 +96,9 @@ Since now you have imported the certificate and have authenticated yourself, you
 When the organization is created an SSL Certificate is downloaded to the Browser which is only for Organization adminstration purposes and not for regular use. You need to again go to the *Manage Certificates*  section of your browser and replace the previously imported certificate with the new one and now you will be sending request as the organization which you just created.
 
 # Step 6- (View Dashboard)
+
+**This feature requires that you import the SSL certificate of an Organization. This feature will not work with a normal user SSL certificate. Please remember to check the imported certificate before oprning the dashboard.**
+
 The dashboard provides the following features (as of now) :
 * Add User
 * Train you organization's Face Recognition Model
