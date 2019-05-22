@@ -3,12 +3,17 @@ Attend-ID POC repo - A decentralised bio-metric digital identity management and 
 
 Make sure you are in the root directory of the project.
 
+# Prerequisites :
+* A laptop/PC with a fast enough processor (Intel i5 or higher) and if possible a GPU. This Project requires such a high performance machine because it involves training Machine learning models on the go and also involves a high amount of inference with the trained model. Having a slow PC can result in frequent crashes and lags.
+* Docker and Docker-Compose installed 
+* A Linux Distribution (tested on Ubuntu 18.04, should work on all versions of Ubuntu)
+
 # Step 1 :
 Let's compose the AttendID network
 
 Open up the compose-network.yaml file present in the root directory of the project.
 
-**Replace the path present in the last line of script with the complete path to your directory where the Attend-ID-POC repo was cloned **
+**Replace the path present in the last line of script with the complete path to your directory where the Attend-ID-POC repo was cloned**
 
 Now open up a terminal and execute the following:
 
@@ -60,11 +65,13 @@ Let's focus on *Create User* :
 But before that open up the root directory of the project and open a terminal.
 We will not be clicking pictures. We need atleast 10 clear images with good lighting conditions for the Face Recognition Model to work. For this we have provided you with a tools named img_snap but for it to work we need to give it a video to generate images from.
 
+**Imp NOTE : When you run the record.py app remember to just move your face to the left, right, up and down at a medium speed and once you have done that press *q***
+
 ```
 # MAKE SURE YOU HAVE python 3.6 or above installed
 python3 -m pip install ecapture
 cd tools
-python3 record.py
+python3 record.py 
 
 # Video has been recorded. Now generate the pictures
 # Now you need to Wait while the tool processes the video you just recorded
