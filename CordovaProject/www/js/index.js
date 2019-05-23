@@ -190,7 +190,7 @@ function cameraTakePicture() {
 
       alert(localStorage.getItem("ServerHost"))
       $.ajax({
-       url : 'http://'+localStorage.getItem("ServerHost")+'/app/login',
+       url : 'http://'+localStorage.getItem("ServerHost")+':2018/app/login',
        type : 'POST',
        data : formData,
        processData: false,  // tell jQuery not to process the data
