@@ -63,7 +63,7 @@ On the web UI you can see three options, namely:
 
 Let's focus on *Create User* :
 But before that open up the root directory of the project and open a terminal.
-We will not be clicking pictures. We need atleast 10 clear images with good lighting conditions for the Face Recognition Model to work. For this we have provided you with a tools named img_snap but for it to work we need to give it a video to generate images from.
+We will not be clicking pictures. We need atleast 10 clear images with *good lighting conditions* for the Face Recognition Model to work. For this we have provided you with a tools named img_snap but for it to work we need to give it a video to generate images from.
 
 **Imp NOTE : When you run the record.py app remember to just move your face to the left, right, up and down at a medium speed and once you have done that press *q***
 
