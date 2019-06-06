@@ -114,6 +114,8 @@ Open *Settings >> Advanced >> Manage Certificates*
 
 Import this downloaded certificate. This certificate is signed by our CA and this will validate all your requests sent to our servers.
 
+Before creating another user give the system some time, usuallly just a few seconds, to retrain the face recognition model on your face so that it can recognize you next time.
+
 # Step 5 - (Create Organization)
 Since now you have imported the certificate and have authenticated yourself, you can now create a new organization. The UI is pretty straight forward. You only need to submit the name of the new org and it's done but a valid SSL Certificate (just like the one which you imported recently) is required for creating an organization.
 
