@@ -1,9 +1,32 @@
 # Attend-ID-POC
 Attend-ID POC repo - A decentralised bio-metric digital identity management and verification system
 
-Make sure you are in the root directory of the project.
+**Project Status : POC (semi-productional)**
+
+# Features Implemented : 
+* User Creation
+* Organization Creation
+* Adding Users 
+* Transferring user assets to other organizations (Trans-ID)
+* Attendance Session - creation, marking, indexing
+
+# Upcoming Features (not merged into git) : 
+* Leave application (Leave-In)
+* POSE 
+
+# Special Mentions
+* Intellignence and deployment : Microsoft Azure Cloud Cognitive Services
+* Face Intelligencce : Google Facenet - open source implementation by @davidsandberg 
+* Blockchain :  Hyperledger Sawtooth
+* Mass-Storage : IPFS
+* Blochain Storage : BigchainDB
+* Android Dev : The Cordova Project
+* Vision :  OpenCV 
+* Support : Genesis-Hack@Hackerearth
 
 # Prerequisites :
+Make sure you are in the root directory of the project.
+
 * A laptop/PC with a fast enough processor (Intel i5 or higher) and if possible a GPU. This Project requires such a high performance machine because it involves training Machine learning models on the go and also involves a high amount of inference with the trained model. Having a slow PC can result in frequent crashes and lags.
 * Docker and Docker-Compose installed 
 * A Linux Distribution (tested on Ubuntu 18.04, should work on all versions of Ubuntu)
