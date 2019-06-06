@@ -18,7 +18,7 @@ RUN apt install -y sawtooth
 
 RUN python3 -m pip install tornado bigchaindb_driver
 RUN apt-get install -y curl
-RUN python3 -m pip install pyopenssl ipfshttpclient
+RUN python3 -m pip install pyopenssl ipfsapi==0.4.3
 RUN python3 -m pip install --upgrade protobuf grpcio-tools
 RUN python3 -m pip install pillow imutils
 
@@ -41,4 +41,3 @@ RUN python3 -m pip install scipy==1.0.0 scikit-learn tensorflow numpy==1.16.2
 RUN python3 -m pip install supervisor
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
-RUN python3 -m pip install ipfsapi==0.4.3
