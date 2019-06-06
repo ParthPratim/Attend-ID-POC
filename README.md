@@ -142,7 +142,7 @@ NOTE : The OrgID can be found on the top left corner of the dashboard.
 Install the APK on your phone by connecting your phone to your laptop/PC and execute the following :
 **(adb should be installed)**
 ```
-adb install CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+adb install CordovaProject/platforms/android/app/app-debug.apk
 ```
 Make sure that your phone and the laptop running the docker setup share same the same WLAN network.
 
