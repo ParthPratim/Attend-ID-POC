@@ -114,7 +114,7 @@ NOTE : The OrgID can be found on the top left corner of the dashboard.
 
 # Step 7 - (Attendance Marking - Mobile App)
 
-**Android APK :** *CordovaProject/platforms/android/app/build/outputs/apk/debug/app-debug.apk*
+**Android APK :** *CordovaProject/platforms/android/app/app-debug.apk*
 
 Install the APK on your phone by connecting your phone to your laptop/PC and execute the following :
 **(adb should be installed)**
