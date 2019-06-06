@@ -9,6 +9,7 @@ Attend-ID POC repo - A decentralised bio-metric digital identity management and 
 * Adding Users 
 * Transferring user assets to other organizations (Trans-ID)
 * Attendance Session - creation, marking, indexing
+* Dynamic Face Recogniton Model Training
 
 # Upcoming Features (not merged into git) : 
 * Leave application (Leave-In)
@@ -124,12 +125,9 @@ When the organization is created an SSL Certificate is downloaded to the Browser
 
 The dashboard provides the following features (as of now) :
 * Add User
-* Train you organization's Face Recognition Model
 * Transfer Asset(Member)
 
 The Add User interface is similar to the create user as in you need to give images of the user who you wan't to add and he would be recognized by our Global Facial Recognition Engine and be added to your member list but you also need to specify is the user that is being added has the privilidge of marking attendance using our *Attendance marking service* .
-
-The Train FR Model button alows you to train the your organization's face recognition model on your current member list so that it recognizes them the next time it sees them
 
 The Transfer asset is a utility which requires you to know the Organization ID of the organization you wan't to transfer it to using the **TRANSFER** button below every user in your member list.
 
