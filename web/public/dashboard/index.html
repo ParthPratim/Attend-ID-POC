@@ -440,6 +440,7 @@ body {
         }
         console.log(data)
         document.getElementById('org_name').value = data
+        document.getElementById('org_name_disp').innerHTML = data
         $.get("https://127.0.0.1:2018/dashboard/org/creator", function(data2) {
           document.getElementById('creator_id').value = data2
         })
@@ -600,8 +601,11 @@ body {
             <div class="gwd-div-tlnh " id="new_user">
               <gwd-image class="gwd-image-xlwd" id="gwd-image_2" source="new-user.png"></gwd-image>
               <span class="gwd-span-1yt8 " id="new_user_clk">New User</span>
+              <span style="margin-left: 200px;display: inline-block;margin-top: 30%;font-family:Oswald;width:500px;text-align:center">
+                Organization : <span id="org_name_disp"></span>
+              </span>
             </div>
-            <button id="train_model" class="gwd-button-7skr">Train FR Model</button>
+
           </div>
         </div>
       </div>
