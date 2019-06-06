@@ -2,7 +2,8 @@ import zmq
 import hashlib
 from event_sub.protos.events_pb2 import *
 from event_sub.protos.validator_pb2 import *
-from event_sub import initiate_training
+#from event_sub import initiate_training
+from event_sub.azure_face_module import AzureFaceModule
 from rest_endpoint.internals.get_state_data import GetStateData
 
 DIGITAL_ID_ADDRESS_PREFIX = hashlib.sha512("digital_id".encode('utf-8')).hexdigest()[0:6]
@@ -59,5 +60,5 @@ def SubscribeEvent():
             if e.event_type == EVENT_TYPE:
 
                 data = GetStateData(e.attributes[0].value)
-                initiate_training.Now(data['DigitalID'],data['TrainingImageHash'])
-                pass
+                #initiate_training.Now(data['DigitalID-'],data['TrainingImageHash'])
+                AzureFaceModule.initiate_cloud_training(data['DigitalID'],data['TrainingImageHash'])

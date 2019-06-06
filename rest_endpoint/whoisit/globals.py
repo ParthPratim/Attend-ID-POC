@@ -9,7 +9,8 @@ from tornado.web import HTTPError
 from rest_endpoint.digital_id.state import DigitalIDStateAddress
 from rest_endpoint.orgs.state import OrgsStateAddress
 from rest_endpoint.internals.get_state_data import GetStateData
-from facenet.face_recognition_image import RecognizeFace
+#from facenet.face_recognition_image import RecognizeFace
+from fre_layer.azure_cloud import RecognizeFace
 from rest_endpoint.sawtooth_client.tx import SawtoothClientStub
 from rest_endpoint.internals.ssl_auth import *
 
@@ -25,7 +26,7 @@ class GlobalWhoisItHandler(tornado.web.RequestHandler):
         pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
         np_img = np.array(pixels,dtype=np.uint8)
         raw_imgs.append(cv2.cvtColor(np_img, cv2.COLOR_BGR2RGB))
-        probable = ["7b967f05cbfd7e643c4691a25dfc23ceb520c74577a3ed31f5ed5c832dbe0c62"] # RecognizeFace(raw_imgs)
+        probable =  RecognizeFace(raw_imgs) #["05c2caeeffa4850d6a774ee6fff54bb53f6f765a13fd666ea1ab987453332776"] #
         if probable != None:
             if len(probable) != 0 :
                 digital_id = probable[0]
@@ -54,6 +55,7 @@ class GlobalWhoisItHandler(tornado.web.RequestHandler):
                     self.write({
                         'AccessToken' : token,
                         'DigitalID' : digital_id,
+                        'AppUsername' : payload['uname'],
                         'Organizations' : entry
                     })
                     self.finish()

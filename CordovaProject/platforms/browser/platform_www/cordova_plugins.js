@@ -53,6 +53,14 @@ module.exports = [
         "clobbers": [
             "SecureStorage"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-spinner-dialog/www/spinner.js",
+        "id": "cordova-plugin-spinner-dialog.SpinnerDialog",
+        "pluginId": "cordova-plugin-spinner-dialog",
+        "merges": [
+            "window.plugins.spinnerDialog"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -61,7 +69,8 @@ module.exports.metadata =
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-dialogs": "2.0.1",
-    "cordova-plugin-secure-storage": "3.0.2"
+    "cordova-plugin-secure-storage": "3.0.2",
+    "cordova-plugin-spinner-dialog": "1.3.1"
 }
 // BOTTOM OF METADATA
 });

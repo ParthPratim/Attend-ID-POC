@@ -12,7 +12,8 @@ from rest_endpoint.digital_id.state import DigitalIDStateAddress
 from rest_endpoint.orgs.state import OrgsStateAddress
 from rest_endpoint.internals.get_state_data import GetStateData
 from rest_endpoint.internals.ipfs_storage import IpfsStorage
-from facenet.face_recognition_image import RecognizeFace
+#from facenet.face_recognition_image import RecognizeFace
+from fre_layer.azure_cloud import RecognizeFace
 from rest_endpoint.sawtooth_client.tx import SawtoothClientStub
 from rest_endpoint.internals.ssl_auth import *
 from bigchaindb.asset_logic.attendance import AttendanceAssets
@@ -48,6 +49,7 @@ class OrgWhoisItHandler(tornado.web.RequestHandler):
             self.finish()
             return
         else:
+            '''
             FRModel_hash = s_data['FRModel']
             if FRModel_hash == "":
                 self.write({
@@ -57,7 +59,8 @@ class OrgWhoisItHandler(tornado.web.RequestHandler):
                 return
 
             (model,class_names) = pickle.loads(IpfsStorage.from_hash(FRModel_hash).load_contents())
-            probable = RecognizeFace(raw_imgs, model=model,class_names=class_names)
+            '''
+            probable = RecognizeFace(raw_imgs)
             if probable != None:
                 if len(probable) > 0 :
                     prob_did = probable[0]
@@ -65,6 +68,12 @@ class OrgWhoisItHandler(tornado.web.RequestHandler):
                     if dsa == False:
                         self.write({
                             "error" : "Internal Error"
+                        })
+                        self.finish()
+                        return
+                    if payload['org_id'] not in dsa['Organizations'] :
+                        self.write({
+                            "error" : "You don't belong to this Organization. Get Lost you Spoofer !"
                         })
                         self.finish()
                         return
@@ -78,7 +87,10 @@ class OrgWhoisItHandler(tornado.web.RequestHandler):
                             return
                         else:
                             self.write({
-                                "status" : "Marked Your Attendance."
+                                "status" : "Marked Your Attendance.",
+                                "code" : "ATTENDANCE_MARKED",
+                                "did" : prob_did,
+                                "name" : dsa['Name']
                             })
                             self.finish()
                             return
@@ -99,6 +111,7 @@ class AttendanceSession(tornado.web.RequestHandler):
             return
 
         payload['sess_name'] = payload['sess_name'].strip()
+
         if len(payload['sess_name']) == 0 :
             self.write({
                 "error" : "Invalid Session Name."
@@ -135,3 +148,29 @@ class AttendanceSession(tornado.web.RequestHandler):
                         })
                         self.finish()
                         return
+
+class SessionList(tornado.web.RequestHandler):
+
+    def get(self):
+        payload = tornado.escape.json_decode(self.request.body)
+
+        if "initiator" not in payload:
+            self.write({
+                "error" : "No Session Initiator mentioned !!!"
+            })
+            self.finish()
+            return
+        print("Getting Session List...")
+
+        sess_list = AttendanceAssets.GetSessionList(payload['initiator'])
+        print(sess_list)
+        if len(sess_list) == 0 :
+            self.write({
+                "error" : "No Session Entries Found for This Session Initiator"
+            })
+            self.finish()
+        else:
+            self.write({
+                "Sessions" : sess_list
+            })
+            self.finish()

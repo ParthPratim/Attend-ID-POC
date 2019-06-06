@@ -55,12 +55,21 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "SecureStorage"
       ]
+    },
+    {
+      "id": "cordova-plugin-spinner-dialog.SpinnerDialog",
+      "file": "plugins/cordova-plugin-spinner-dialog/www/spinner.js",
+      "pluginId": "cordova-plugin-spinner-dialog",
+      "merges": [
+        "window.plugins.spinnerDialog"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-dialogs": "2.0.1",
-    "cordova-plugin-secure-storage": "3.0.2"
+    "cordova-plugin-secure-storage": "3.0.2",
+    "cordova-plugin-spinner-dialog": "1.3.1"
   };
 });

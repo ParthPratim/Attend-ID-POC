@@ -34,7 +34,7 @@ class SawtoothClientStub:
 
     def txn_header_gen(self):
         self.load_keys()
-        print(self._payload)
+        print((self._payload))
         self.payload_bytes = cbor.dumps(self._payload)
 
         self.txn_header_bytes = TransactionHeader(

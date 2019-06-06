@@ -35,32 +35,95 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/admin_dashboard.css">
+        <link rel="stylesheet" type="text/css" href="css/spectre.min.css">
+        <link rel="stylesheet" type="text/css" href="css/spectre-exp.min.css">
+        <link rel="stylesheet" type="text/css" href="css/spectre-icons.min.css">
         <title>Admin dashboard</title>
     </head>
     <body>
-
-        <div class="app">
-          <div class="ToolBar">
-            <span class="title">
-              Dashboard
+      <div class="app">
+        <div class="modal modal-sm" id="marked_modal" style="width:100%">
+          <a href="#close" class="modal-overlay" aria-label="Close"></a>
+            <div class="modal-container" style="left:5%">
+              <div class="modal-header">
+                <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+                <div class="modal-title h5">Attendance Marked</div>
+                </div>
+                <div class="modal-body">
+                  <div class="content">
+                    <img width=100 height="100" id="marked_for_img">
+                    <p>
+                      <h6 id="marked_for_name">
+                        Parth Pratim
+                      </h6>
+                    </p>
+                  </div>
+                </div>
+            </div>
+        </div>
+      <header class="navbar ToolBar" >
+        <section class="navbar-section">
+        </section>
+        <section class="navbar-center">
+          <a href="#" class="btn btn-link" style="color:#fff">DASHBOARD</a>
+        </section>
+        <section class="navbar-section">
+        </section>
+      </header>
+          <div class="message">
+            <div style="width:70%;display:inline-block;vertical-align:top">
+            <span class="msg" style="font-size:15px">
+              Hello
+            </span>
+            <span class="msg" id="user-name-show">
+              Parth
             </span>
           </div>
-          <button type="button" id="new_session">
-            CREATE NEW ATTENDANCE SESSION
-          </button>
-          <div id="sessionname" style="display:none">
-            Session Name : Parth
+          <div style="width:30%;text-align:right;display:inline-block;">
+          <span class="msg" style="font-size:15px">
+            Organization
+          </span>
+          <span class="msg" id="org-name-show">
+            Org Name
+          </span>
+        </div>
           </div>
-          <br><br>
-          <div id="sessionid" style="display:none">
-            SessionID : wedafdfsdfds
+          <div class="hero hero-sm bg-dark" style="height:100px;padding-top:20px;">
+              <div class="hero-body" style="display:none" id="hero-disp">
+              <h6>Session Name - <span id="sessionname">Computer Science</span> </h6>
+                <p style="font-size:13px;" id="sessionid">fadfefedsfds122fff23fg4245vvvdas4fgh</p>
+              </div>
+            <button class="btn"  id="new_session" style="border-color:#fff;color:#fff;background:transparent;">CREATE NEW ATTENDANCE SESSION</button>
           </div>
-          <br><br>
-          <button type="button" id="new_session" >
-            Mark Attendance
-          </button>
-
-
+          <div id="button-holder"  style="width:100%;padding:5px 0px 5px 0px;text-align:center;display:none" class=bg-dark>
+            <button class="btn btn-primary" id="new_session_btn" style="display:none">MARK ATTENDANCE</button>
+            <button class="btn" id="stop_this_session">STOP SESSION</button>
+          </div>
+          <div class="container">
+              <div class="columns">
+                <div class="column col-12">
+                  <h4><b>Previous Sessions</b></h4>
+                </div>
+              </div>
+              <table class="table table-striped table-hover" style="font-size:14px">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Present</th>
+                  </tr>
+                </thead>
+                <tbody id="session_list_data">
+                  <tr>
+                    <td>Electronics</td>
+                    <td>14/05/2019</td>
+                    <td>23:00</td>
+                    <td>25</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>

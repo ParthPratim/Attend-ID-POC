@@ -494,8 +494,10 @@ function getDigitalIDState(creator_id){
 }
 
 function getStateData(state_addr,callback){
+  console.log(state_addr)
 
-  request.get("http://localhost:8008/state/"+state_addr,function(err,resp,body){
+  request.get("http://172.30.0.1:8008/state/"+state_addr,function(err,resp,body){
+
     data = JSON.parse(body)
     if(data.error){
       console.log("ERROR")

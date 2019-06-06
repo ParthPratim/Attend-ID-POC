@@ -23,7 +23,8 @@ from rest_endpoint.internals.get_state_data import GetStateData
 from bigchaindb.utils.bdb_ukey import GenerateRandomKeyPair
 from fre_layer.finalize_image import DetectAlignResize
 from fre_layer.readimg import raw_process
-from facenet.face_recognition_image import RecognizeFace
+#from facenet.face_recognition_image import RecognizeFace
+from fre_layer.azure_cloud import RecognizeFace
 
 with open("config.json","r") as config_json:
     SERVER_PK12_FILE_HASH = json.load(config_json)["SERVER_PK12_FILE_HASH"]
@@ -89,9 +90,10 @@ class DigitalIDHandler(tornado.web.RequestHandler):
                 np_img = cv2.cvtColor(np_img, cv2.COLOR_BGRA2BGR)
             np_imgs.append(np_img)
 
-            print(ufile['filename'])
+            print((ufile['filename']))
 
         probable = RecognizeFace(raw_imgs)
+        print(probable)
         if probable != None:
             if len(probable) != 0 :
                 print("PROBABLY : " + probable[0])
@@ -104,15 +106,16 @@ class DigitalIDHandler(tornado.web.RequestHandler):
                     })
                 self.finish()
                 return
-
+        '''
         for np_img in np_imgs:
             final_img = np.array(DetectAlignResize(np_img).process())
             if final_img is not None and len(final_img.shape)  != 0:
                 print("ADDED")
                 final_img = raw_process(final_img)
                 struct_newuser['RGBS'].append(final_img)
+        '''
 
-        struct_newuser['RGBS'] =  np.array(struct_newuser['RGBS'])
+        struct_newuser['RGBS'] =  np.array(raw_imgs)
         snu_hash = ipfs.store_pyobj(struct_newuser)
         payload['training_image_hash'] = snu_hash
 
@@ -141,7 +144,7 @@ class DigitalIDHandler(tornado.web.RequestHandler):
         tx_sawtooth.set_address_scope(inputs=[state_addr],outputs=[state_addr])
         tx_sawtooth.prepare_tx_batch()
         response = tx_sawtooth.send()
-        print(payload["uname"] + "  :  " + digital_id)
+        print((payload["uname"] + "  :  " + digital_id))
         file_name = payload["uname"]+"."+digital_id+".p12"
 
 

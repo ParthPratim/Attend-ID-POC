@@ -5,7 +5,9 @@ ASSET_LIST = {
             "SessionName" : "",
             "SessionInitiator" : "",
             "Organization" : "",
-            "SessionID" : ""
+            "SessionID" : "",
+            "CreationDate" : "",
+            "CreationTime" : ""
         }
     },
     "Present" : {

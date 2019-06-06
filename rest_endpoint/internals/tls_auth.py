@@ -258,7 +258,7 @@ class CertAuthority(object):
             try:
                 csr = m2.X509.load_request_bio(bio)
             except:
-                print(self._incoming+'/'+fname, "is fishy, skipping")
+                print((self._incoming+'/'+fname, "is fishy, skipping"))
                 continue
             res.append((csr,self._incoming+'/'+fname))
         return res
@@ -271,7 +271,7 @@ class CertAuthority(object):
         for csr,path in self.incoming():
             if not scrutinizer or scrutinizer(csr):
                 cert=self.signcsr(csr)
-                print("signed", csr.get_subject())
+                print(("signed", csr.get_subject()))
                 if cert:
                     os.unlink(path)
                     signed.append(cert)
@@ -336,7 +336,7 @@ class CertAuthority(object):
         modulus_str = cert.get_pubkey().get_modulus()
         sha_hash = hashlib.sha1(modulus_str).digest()
         for i in range(0,len(sha_hash)):
-            print(sha_hash[i])
+            print((sha_hash[i]))
             sha_hash[i] = binascii.hexlify(sha_hash[i].decode())
 
         sub_key_id = ":".join(["%02X"%ord(byte) for byte in sha_hash])
@@ -547,7 +547,7 @@ def run():
         # reads the cert from stdin
         sec=load(sys.argv[1:][sys.argv[1:].index('p12')+1])
         cert=sys.stdin.read()
-        print(pkcs12(sec,cert, ca._pub))
+        print((pkcs12(sec,cert, ca._pub)))
         return
 
 if __name__ == "__main__":

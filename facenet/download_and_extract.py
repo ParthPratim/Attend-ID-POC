@@ -14,10 +14,10 @@ def download_and_extract_file(model_name, data_dir):
     file_id = model_dict[model_name]
     destination = os.path.join(data_dir, model_name + '.zip')
     if not os.path.exists(destination):
-        print('Downloading file to %s' % destination)
+        print(('Downloading file to %s' % destination))
         download_file_from_google_drive(file_id, destination)
         with zipfile.ZipFile(destination, 'r') as zip_ref:
-            print('Extracting file to %s' % data_dir)
+            print(('Extracting file to %s' % data_dir))
             zip_ref.extractall(data_dir)
 
 def download_file_from_google_drive(file_id, destination):

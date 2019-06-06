@@ -427,7 +427,7 @@ body {
   <script data-source="gwdpage_min.js" data-version="12" data-exports-type="gwd-page" src="gwdpage_min.js"></script>
   <script data-source="gwdpagedeck_min.js" data-version="12" data-exports-type="gwd-pagedeck" src="gwdpagedeck_min.js"></script>
   <script data-source="gwdimage_min.js" data-version="12" data-exports-type="gwd-image" src="gwdimage_min.js"></script>
-  
+
   <script type="text/javascript" src="gwdid.min.1.0.js" gwd-gwdid-version="1.0"></script>
   <script type="text/javascript" gwd-events="support" src="gwd-events-support.1.0.js"></script>
   <script>
@@ -523,7 +523,7 @@ body {
       doc = document.getElementById('select_1')
       formData.append('org_name', document.getElementById('org_name').value)
       formData.append('creator_id', document.getElementById('creator_id').value)
-      alert(document.getElementById('creator_id').value)
+      //alert(document.getElementById('creator_id').value)
       formData.append('can_mark_attendance', doc.options[doc.selectedIndex].value)
       $.ajax({
         url: 'https://127.0.0.1:2018/api/v1/core/orgs/tx_connector/add_new_user',
@@ -582,7 +582,7 @@ body {
 </head>
 
 <body class="document-body">
-  
+
   <input type="hidden" id="org_name" value=" ">
   <input type="hidden" id="creator_id" value=" ">
   <gwd-pagedeck class="gwd-page-container" id="pagedeck" data-gwd-offset-top="0px" data-gwd-offset-left="0px">

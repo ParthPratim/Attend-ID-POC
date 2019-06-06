@@ -43,7 +43,7 @@ def BuildOrgFRModel(org_id):
             xhash = entry[1]
             persons.append(digital_id)
             rgbs = pickle.loads(IpfsStorage.from_hash(xhash).load_contents())['RGBS']
-            print(len(rgbs))
+            print((len(rgbs)))
             for rgb in rgbs:
                 imgs.append(rgb)
                 labels.append(ct)

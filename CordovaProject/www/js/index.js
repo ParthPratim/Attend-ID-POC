@@ -136,7 +136,19 @@ function ProcessResponse(response){
 
         ss.set(
         function(key) {
-          window.location = "admin_dashboard.html"
+
+          ss.set(
+          function(key) {
+            window.location = "admin_dashboard.html"
+          },
+
+          function(error) {
+            console.log("Error " + error);
+          },
+          "AppUsername",
+          response.AppUsername
+        );
+
         },
         function(error) {
           console.log("Error " + error);
@@ -187,8 +199,9 @@ function cameraTakePicture() {
       var blob = b64toBlob(imageData,'image/jpeg')
       var formData = new FormData();
       formData.append("images",blob,'user_login.jpeg')
-
-      alert(localStorage.getItem("ServerHost"))
+      setTimeout(function () {
+        window.plugins.spinnerDialog.show(null, "Creating New Session",true);
+      }, 500);
       $.ajax({
        url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/login',
        type : 'POST',
@@ -197,7 +210,7 @@ function cameraTakePicture() {
        contentType: false,  // tell jQuery not to set contentType
        timeout: 10000000,
        success : function(data) {
-
+         window.plugins.spinnerDialog.hide()
          ProcessResponse(data);
          },
       error: function(xhr, status, error) {

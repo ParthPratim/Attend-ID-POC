@@ -70,7 +70,7 @@ def ImageSnap(uname):
     vc = cv2.VideoCapture('output.mp4')
     frames_len = int(vc.get(cv2.CAP_PROP_FRAME_COUNT))
 
-    print("Processing " + str(frames_len) + " frames...")
+    print(("Processing " + str(frames_len) + " frames..."))
     if vc.isOpened(): # try to get the first frame
         rval, frame = vc.read()
     else:
@@ -79,7 +79,7 @@ def ImageSnap(uname):
     while rval:
         # Read image
         im = frame
-        print(bcolors.OKBLUE+" Working on Frame no : " + str(curr_frame_index + 1) + "/" + str(frames_len))
+        print((bcolors.OKBLUE+" Working on Frame no : " + str(curr_frame_index + 1) + "/" + str(frames_len)))
         sys.stdout.write("\033[F") # Cursor up one line
         (h, w) = im.shape[:2]
         blob = cv2.dnn.blobFromImage(cv2.resize(im, (300,300)), 1.0, (300, 300), (103.93, 116.77, 123.68))
@@ -149,14 +149,14 @@ def ImageSnap(uname):
 
 
 if __name__ == "__main__":
-    print(bcolors.HEADER + "Welcome to AttendID Image Dataset generator")
+    print((bcolors.HEADER + "Welcome to AttendID Image Dataset generator"))
     print("\n")
-    print(bcolors.BOLD + "Enter Name (any) : ")
+    print((bcolors.BOLD + "Enter Name (any) : "))
     name = input()
     if os.path.isdir(name):
         os.rmdir(name)
 
     os.mkdir(name)
-    print(bcolors.WARNING + bcolors.BOLD + bcolors.UNDERLINE + "Move your face slowly to the left, right, up and down !!" + bcolors.ENDC)
+    print((bcolors.WARNING + bcolors.BOLD + bcolors.UNDERLINE + "Move your face slowly to the left, right, up and down !!" + bcolors.ENDC))
 
     ImageSnap(name)

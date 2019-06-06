@@ -4,7 +4,7 @@ from tornado.httpserver import HTTPServer
 from rest_endpoint.orgs.handler import OrgsHandler, OrgInfo
 from rest_endpoint.digital_id.handler import DigitalIDHandler
 from rest_endpoint.whoisit.globals import GlobalWhoisItHandler
-from rest_endpoint.whoisit.org import OrgWhoisItHandler, AttendanceSession
+from rest_endpoint.whoisit.org import OrgWhoisItHandler, AttendanceSession, SessionList
 from bigchaindb.asset_logic.orgs import OrgsAssets
 from bigchaindb_driver.crypto import generate_keypair
 from bigchaindb.utils.bdb_ukey import Key
@@ -21,6 +21,7 @@ def setup_app():
         (r"/api/v1/whoisit/org", OrgWhoisItHandler),
         (r"/api/v1/org/attendance/new_session", AttendanceSession),
         (r"/api/v1/org/members", OrgInfo),
+        (r"/api/v1/org/attendance/sessions/list",SessionList),
         (r"/", MainHandler)
     ])
 

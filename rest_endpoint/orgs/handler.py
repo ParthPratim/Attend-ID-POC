@@ -96,8 +96,8 @@ class OrgsHandler(tornado.web.RequestHandler):
             did_data1 = GetStateData(digital_id_creator_state_addr)
             did_data2 = GetStateData(digital_id_newm_state_addr)
             did_data3 = GetStateData(org_addr)
-            print("CREATOR : "+digital_id_creator_state_addr)
-            print("MEMBER : "+digital_id_newm_state_addr)
+            print(("CREATOR : "+digital_id_creator_state_addr))
+            print(("MEMBER : "+digital_id_newm_state_addr))
             print(did_data1)
             print(did_data2)
             if did_data1 != False and did_data2 != False:
@@ -129,7 +129,7 @@ class OrgsHandler(tornado.web.RequestHandler):
                     print("Failed Loading asset...")
                 else:
                     print(asset_id)
-                    print(u_keys.public_key)
+                    print((u_keys.public_key))
                     new_keys = Key(did_data5['BDB_pub_key'],did_data5['BDB_priv_key'])
                     status = OrgsAssets.TransferMember(asset_id,u_keys,new_keys)
                     if status == False:
@@ -155,7 +155,7 @@ class OrgsHandler(tornado.web.RequestHandler):
         if process:
             print(payload)
             sawtooth_rest_api =  SawtoothClientStub(tf_name="orgs",tf_version="1.9",payload=payload)
-            print(address.address)
+            print((address.address))
             sawtooth_rest_api.set_address_scope(inputs=inputs,outputs=outputs)
             sawtooth_rest_api.prepare_tx_batch()
             response = sawtooth_rest_api.send()

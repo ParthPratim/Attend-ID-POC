@@ -21,7 +21,10 @@
  var OrganizationName = ""
  var OrganizationID = ""
  var SessionID = ""
+ var AppUsername = ""
+ var DigitalID = ""
  var ss;
+ var localStorage = window.localStorage;
 
  var _init = function() {
    ss = new cordova.plugins.SecureStorage(
@@ -61,6 +64,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         _init()
+        loadSessionVariables();
     },
 
     // Update DOM on a Received Event
@@ -68,6 +72,92 @@ var app = {
 
     }
 };
+
+function loadSessionVariables(){
+  ss.get(
+  function(key) {
+    AccessToken = key
+    ss.get(
+    function(key) {
+      OrganizationName = key
+      ss.get(
+      function(key) {
+        OrganizationID = key
+
+        ss.get(
+        function(key) {
+          DigitalID = key
+          alert(DigitalID)
+          alert(window.DigitalID)
+          ss.get(
+          function(key) {
+            AppUsername = key
+            document.getElementById('user-name-show').innerHTML = AppUsername
+            RefreshSessionList()
+          },
+          function(error) {
+            console.log("Error " + error);
+          },
+          "AppUsername"
+        );
+
+        },
+        function(error) {
+          console.log("Error " + error);
+        },
+        "DigitalID"
+      );
+
+
+      },
+      function(error) {
+        console.log("Error " + error);
+      },
+      "OrganizationID"
+    );
+
+
+    },
+    function(error) {
+      console.log("Error " + error);
+    },
+    "OrganizationName"
+  );
+
+
+  },
+  function(error) {
+    console.log("Error " + error);
+  },
+  "AccessToken"
+);
+
+}
+
+
+function RefreshSessionList(){
+
+  var formData = new FormData();
+  formData.append("initiator",DigitalID)
+
+  $.ajax({
+   url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/attendance/sessions/list',
+   type : 'POST',
+   data : formData,
+   processData: false,  // tell jQuery not to process the data
+   contentType: false,  // tell jQuery not to set contentType
+   timeout: 10000000,
+   success : function(data) {
+     data = JSON.parse(data)
+     list_data = data.Sessions
+     table_data = ""
+     for(i = 0 ; i < list_data.length  ;i++){
+       table_data += "<tr><td>"+list_data[i].Name+"</td><td>"+list_data[i].Date+"</td><td>"+list_data[i].Time+"</td><td>"+list_data[i].Present+"</td></tr>"
+     }
+     document.getElementById('session_list_data').innerHTML = table_data
+   }
+ });
+}
 
 function b64toBlob(b64Data, contentType, sliceSize) {
         contentType = contentType || '';
@@ -113,82 +203,45 @@ function InititateSession(){
        return;
      }
 
-     ss.get(
-     function(key) {
-       AccessToken = key
-       ss.get(
-       function(key) {
-         OrganizationName = key
-         ss.get(
-         function(key) {
-           OrganizationID = key
-
-           ss.get(
-           function(key) {
-             DigitalID = key
              var formData = new FormData();
              formData.append("org_id",OrganizationID)
-             formData.append("sess_name",result)
+             formData.append("sess_name",text)
              formData.append("sess_ini_did",DigitalID)
-
+             setTimeout(function () {
+               window.plugins.spinnerDialog.show("Attendance Session", "Creating New Session",true);
+             }, 500);
              $.ajax({
-              url : 'http://192.168.43.217:2017/app/attendance/new_session',
+              url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/attendance/new_session',
               type : 'POST',
               data : formData,
               processData: false,  // tell jQuery not to process the data
               contentType: false,  // tell jQuery not to set contentType
               timeout: 10000000,
               success : function(data) {
-
+                  window.plugins.spinnerDialog.hide()
                   if("error" in data){
                     alert("Error" + data.error)
                   }
                   else{
                     alert("Session Created with ID : " + data.SessionID)
                     SessionID = data.SessionID
-                    document.getElementById('sessionid').innerHTML = "SessionID : "+ SessionID
-                    document.getElementById('sessionname').innerHTML = "SessionName : "+ result
+                    document.getElementById('sessionid').innerHTML = SessionID
+                    document.getElementById('sessionname').innerHTML = result.input1.trim()
+                    document.getElementById('new_session_btn').style.display = "inline"
+                    document.getElementById('new_session').style.display = "none"
+                    document.getElementById('new_session_btn').addEventListener("click",cameraTakePicture)
+                    document.getElementById('hero-disp').style.display = "block"
+                    document.getElementById('button-holder').style.display = "block"
+                    document.getElementById('stop_this_session').addEventListener("click",function(){
+                      document.getElementById('new_session_btn').style.display = "none"
+                      document.getElementById('new_session').style.display = "block"
+                      document.getElementById('hero-disp').style.display = "none"
+                      document.getElementById('button-holder').style.display = "none"
+                    })
                   }
                 }
             });
 
-
-           },
-           function(error) {
-             console.log("Error " + error);
-           },
-           "DigitalID"
-         );
-
-
-         },
-         function(error) {
-           console.log("Error " + error);
-         },
-         "OrganizationID"
-       );
-
-
-       },
-       function(error) {
-         console.log("Error " + error);
-       },
-       "OrganizationName"
-     );
-
-
-     },
-     function(error) {
-       console.log("Error " + error);
-     },
-     "AccessToken"
-   );
-
-
-/*
-
-
-*/
 
    }
 
@@ -205,22 +258,35 @@ function cameraTakePicture() {
 
    function onSuccess(imageData) {
       //var image = document.getElementById('login_img');
-      //image.src = "data:image/jpeg;base64," + imageData;
 
       var blob = b64toBlob(imageData,'image/jpeg')
       var formData = new FormData();
       formData.append("images",blob,'user_login.jpeg')
-
+      formData.append("org_id",OrganizationID)
+      formData.append("sess_id",SessionID)
+      setTimeout(function () {
+        window.plugins.spinnerDialog.show("Attendance Session ", "Marking Attendance",true);
+      }, 500);
       $.ajax({
-       url : 'http://192.168.43.217:2017/app/login',
+       url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/attendance/verify_user',
        type : 'POST',
        data : formData,
        processData: false,  // tell jQuery not to process the data
        contentType: false,  // tell jQuery not to set contentType
        timeout: 10000000,
        success : function(data) {
-           console.log(data);
-           alert(data);
+         setTimeout(function () {
+           window.plugins.spinnerDialog.hide()
+         }, 500);
+         data = JSON.parse(data)
+         if(data.code.localeCompare('ATTENDANCE_MARKED') == 0 ){
+           alert("Marked Attendance for : " + data.name)
+         }
+         else{
+           alert("Error : " + data.error)
+         }
+
+         RefreshSessionList()
          },
       error: function(xhr, status, error) {
         var err = eval("(" + xhr.responseText + ")");
@@ -233,5 +299,6 @@ function cameraTakePicture() {
       alert('Failed because: ' + message);
    }
 }
+
 
 app.initialize();

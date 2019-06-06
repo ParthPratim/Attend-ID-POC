@@ -5,8 +5,8 @@ from tornado.httpserver import HTTPServer
 
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
-        print(len(self.request.files['filename']))
-        print(self.get_body_argument("folder_id", default=None, strip=False))
+        print((len(self.request.files['filename'])))
+        print((self.get_body_argument("folder_id", default=None, strip=False)))
 
         self.write("Hello, world")
 

@@ -17,6 +17,7 @@
  * under the License.
  */
 var ss;
+var localStorage = window.localStorage;
 
 var _init = function() {
   ss = new cordova.plugins.SecureStorage(
@@ -48,6 +49,7 @@ var app = {
     initialize: function() {
 
       document.getElementById('login').addEventListener('click',cameraTakePicture)
+      document.getElementById('set_server_host').addEventListener('click',SetServerHost)
       document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
@@ -134,7 +136,19 @@ function ProcessResponse(response){
 
         ss.set(
         function(key) {
-          window.location = "admin_dashboard.html"
+
+          ss.set(
+          function(key) {
+            window.location = "admin_dashboard.html"
+          },
+
+          function(error) {
+            console.log("Error " + error);
+          },
+          "AppUsername",
+          response.AppUsername
+        );
+
         },
         function(error) {
           console.log("Error " + error);
@@ -185,18 +199,18 @@ function cameraTakePicture() {
       var blob = b64toBlob(imageData,'image/jpeg')
       var formData = new FormData();
       formData.append("images",blob,'user_login.jpeg')
-
-
-
+      setTimeout(function () {
+        window.plugins.spinnerDialog.show(null, "Creating New Session",true);
+      }, 500);
       $.ajax({
-       url : 'http://192.168.43.217:2017/app/login',
+       url : 'http://'+localStorage.getItem("ServerHost")+':2017/app/login',
        type : 'POST',
        data : formData,
        processData: false,  // tell jQuery not to process the data
        contentType: false,  // tell jQuery not to set contentType
        timeout: 10000000,
        success : function(data) {
-
+         window.plugins.spinnerDialog.hide()
          ProcessResponse(data);
          },
       error: function(xhr, status, error) {
@@ -209,6 +223,33 @@ function cameraTakePicture() {
    function onFail(message) {
       alert('Failed because: ' + message);
    }
+}
+
+function SetServerHost(){
+  navigator.notification.prompt(
+    "Enter the IP Adddress of host (please don't) add http or https",  // message
+    setHost,                  // callback to invoke
+    'Change Server Host Address',            // title
+    ['Ok','Cancel'],             // buttonLabels
+ );
+}
+
+function setHost(result){
+  text = result.input1.trim()
+  if(text.length == 0 ){
+    alert("Enter a valid Host Address")
+  }
+  else{
+    setIP(text)
+  }
+}
+
+function setIP(ip){
+  if(ss == undefined){
+    setTimeout(function(){setIP(ip)}, 50);//wait 50 millisecnds then recheck
+    return;
+  }
+  localStorage.setItem("ServerHost", ip);
 }
 
 app.initialize();

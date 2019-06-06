@@ -41,3 +41,4 @@ RUN python3 -m pip install scipy==1.0.0 scikit-learn tensorflow numpy==1.16.2
 RUN python3 -m pip install supervisor
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
+RUN python3 -m pip install ipfsapi==0.4.3

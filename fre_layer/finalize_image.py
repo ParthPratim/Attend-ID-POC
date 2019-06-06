@@ -18,7 +18,7 @@ class DetectAlignResize:
 
     def detect_faces(self):
         img =  self._img_to_process
-        print(img.shape)
+        print((img.shape))
         (h, w) = img.shape[:2]
         blob = cv2.dnn.blobFromImage(cv2.resize(img, (300,300)), 1.0, (300, 300), (103.93, 116.77, 123.68))
         net.setInput(blob)

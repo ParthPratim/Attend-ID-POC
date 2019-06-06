@@ -68,7 +68,7 @@ class TransactionHandler:
                 else:
                     state_data = TransactionHandler.deserialize(state_entries[0].data)
                     state_data['Organizations'].append(self._tx_payload.org_id)
-                    print(self._tx_payload.can_mark_attendance)
+                    print((self._tx_payload.can_mark_attendance))
                     if self._tx_payload.can_mark_attendance == "True":
                         print("CanMarkAttendance")
                         state_data['CanMarkAttendance'] = True

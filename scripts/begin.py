@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 
 
-conn = ipfsapi.connect(host='ipfs-net')
+conn = ipfsapi.connect("172.30.0.2")
 
 struct_newuser = {
     "DigitalID" : "",

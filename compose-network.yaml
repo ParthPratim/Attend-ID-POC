@@ -15,17 +15,28 @@
 
 version: "2.1"
 
+networks:
+  frontend:
+    ipam:
+      driver : default
+      config:
+        - subnet: 172.30.0.0/24
+
 services:
 
   ipfs-node:
     image: jbenet/go-ipfs:latest
     container_name: ipfs-net
     ports:
-      - "8080:8080"
+      - "0.0.0.0:8080:8080"
       - "4001:4001"
-      - "127.0.0.1:5001:5001"
+      - "0.0.0.0:5001:5001"
     expose:
       - "5001"
+      - "8080"
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.2
     volumes:
       - "ipfs-docker-staging:/export"
       - "ipfs-docker-data:/data/ipfs"
@@ -44,6 +55,9 @@ services:
       - validator
     volumes:
       - "attendid_src:/src"
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.3
 
     entrypoint: "bash -c \"\
         sleep infinity
@@ -57,6 +71,9 @@ services:
       - "9985:9985"
       - "27017:27017"
       - "26657:26657"
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.4
     volumes:
         - "mongodb-data:/data/db"
         - "mongodb-configdb:/data/configdb"
@@ -67,6 +84,9 @@ services:
     container_name: sawtooth-settings-tp-default
     depends_on:
       - validator
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.5
     entrypoint: settings-tp -vv -C tcp://validator:4004
 
   validator:
@@ -77,6 +97,9 @@ services:
       - 4004
     ports:
       - "4004:4004"
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.6
     # start the validator with an empty genesis batch
     environment:
         - SAWTOOTH_HOME=/usr/share/sawtooth
@@ -94,7 +117,8 @@ services:
         sawtooth-validator -vv \
           --endpoint tcp://validator:8800 \
           --bind component:tcp://eth0:4004 \
-          --bind network:tcp://eth0:8800
+          --bind network:tcp://eth0:8800 \
+          --bind consensus:tcp://eth0:5050 \
       "
 
   devmode-engine:
@@ -103,6 +127,9 @@ services:
     restart: always
     depends_on:
       - validator
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.7
     entrypoint: devmode-engine-rust -C tcp://validator:5050
 
   rest-api:
@@ -112,6 +139,9 @@ services:
       - "8008:8008"
     depends_on:
       - validator
+    networks:
+      frontend:
+        ipv4_address: 172.30.0.8
     entrypoint: sawtooth-rest-api -C tcp://validator:4004 --bind rest-api:8008
 
 volumes:
@@ -126,4 +156,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /complete/path/to/cloned/repo/of/Attend-ID-POC
+      device: /home/devman/GenesisHack/POC/Attend-ID-POC

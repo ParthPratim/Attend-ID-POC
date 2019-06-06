@@ -33,13 +33,13 @@ def Now(new_digital_id,hash):
             append = 0
             persons.append(digital_id)
             rgbs = pickle.loads(IpfsStorage.from_hash(xhash).load_contents())['RGBS']
-            print(len(rgbs))
+            print((len(rgbs)))
             for rgb in rgbs:
                 imgs.append(rgb)
                 labels.append(ct)
             ct = ct + 1
-        print(np.array(imgs).shape)
-        print(np.array(labels).shape)
+        print((np.array(imgs).shape))
+        print((np.array(labels).shape))
         tc =  TrainClassifier("facenet/20180402-114759/",
                               1000,
                               160,
