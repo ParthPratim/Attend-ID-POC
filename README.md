@@ -33,6 +33,14 @@ Make sure you are in the root directory of the project.
 * A Linux Distribution (tested on Ubuntu 18.04, should work on all versions of Ubuntu)
 
 # Step 1 :
+
+Clone the official repo and cd into it:
+```
+git clone https://github.com/ParthPratim/Attend-ID-POC.git
+
+cd Attend-ID-POC
+```
+
 Let's compose the AttendID network
 
 Open up the compose-network.yaml file present in the root directory of the project.
