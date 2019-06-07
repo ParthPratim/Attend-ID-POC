@@ -3,7 +3,7 @@ import numpy
 import requests
 
 def RecognizeFace(rgbs):
-    identify = "http://172.30.0.1:7071/api/IdentifyFace"
+    identify = "https://frelayerattendid.azurewebsites.net/api/identifyface?code=Iq1815mojpLf8XrAJS/SWnLPMjrc9J9B3VpyIAMu5LFJMViKZvMVkg=="
     request = {}
     img_index = 1
     for rgb in rgbs:

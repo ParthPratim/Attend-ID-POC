@@ -9,7 +9,7 @@ class AzureFaceModule:
 
     @staticmethod
     def AddNewPerson(digital_id):
-        new_person = "http://172.30.0.1:7071/api/CreateNewPerson"
+        new_person = "https://frelayerattendid.azurewebsites.net/api/createnewperson?code=4rsj0yDyPSIukboTd3EygoNKfFyrG7h6ONUh9fPKdgld1tc7xo7/zA=="
         response =  requests.post(new_person,json={'digital_id':digital_id}).json()
         if "error" in response :
             logging.info("Failed to add Digital_ID to Azure Face Cognitive Engine !")
@@ -19,7 +19,7 @@ class AzureFaceModule:
 
     @staticmethod
     def AddFace(rgbs,person_id):
-        add_face = "http://172.30.0.1:7071/api/AddPersonFace"
+        add_face = "https://frelayerattendid.azurewebsites.net/api/addpersonface?code=NJiVHe5NHvhVff4Kuvht2AEiuomWBJ9QWjgpTmaH2Kto1Fln8WtkgA=="
         request = {
             'person_id':person_id,
             }
@@ -37,7 +37,7 @@ class AzureFaceModule:
 
     @staticmethod
     def NowTrain():
-         train = "http://172.30.0.1:7071/api/TrainModel"
+         train = "https://frelayerattendid.azurewebsites.net/api/trainmodel?code=T9DPkbs8z5F8b8SZ4pQLy1IVEgFJ2YWlaXtGBDfMVB7mingOz3mTbA=="
          #requests.post(train,json={"action":"train"})
 
     @staticmethod
