@@ -23,7 +23,6 @@ Attend-ID POC repo - A decentralised bio-metric digital identity management and 
 * Blochain Storage : BigchainDB
 * Android Dev : The Cordova Project
 * Vision :  OpenCV 
-* Support : Genesis-Hack@Hackerearth
 
 # Prerequisites :
 Make sure you are in the root directory of the project.
