@@ -1,7 +1,7 @@
 # Attend-ID-POC
 Attend-ID POC repo - A decentralised bio-metric digital identity management and verification system
 
-** WARNING : This is a private project and under the copyright laws, without the legit permission of the author of the project using any code associated with this repository will be considered an act of offence and will be definitely followed by a law suit **
+**WARNING : This is a private project and under the copyright laws, without the legit permission of the author of the project using any code associated with this repository will be considered an act of offence and will be definitely followed by a law suit**
 
 **Project Status : POC (semi-productional)**
 
